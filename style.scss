@@ -69,8 +69,9 @@
     left: 50%;
     padding: 10px 20px;
     transform: translateX(-50%);
+    word-break: keep-all;
     #subs-shot-studio-subs-text {
-      font-size: 50px;
+      font-size: 65px;
       letter-spacing: 1px;
     }
   }

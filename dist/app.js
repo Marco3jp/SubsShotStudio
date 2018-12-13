@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SubsShotStudio
 // @namespace    https://marco.plus
-// @version      0.1
+// @version      0.2
 // @description  Do you want to make SubsShot for Lightning Talks?
 // @author       Marco
 // @match        *://www.youtube.com/*
@@ -19,7 +19,7 @@
         subsPaddingVertical: "10px",
         subsPaddingHorizontal: "20px",
     };
-    let styleSheet = `#subs-shot-studio *{box-sizing:border-box;z-index:99999}#subs-shot-studio #subs-shot-studio-toggle{position:fixed;top:0;left:0;height:50px;width:50px;border:thin solid black;background:silver;border-radius:10px}#subs-shot-studio #subs-shot-studio-form-mother{background-color:rgba(66,66,66,.5);position:fixed;padding:30px 50px;border:thin solid black;width:600px;margin-left:auto;margin-right:auto;top:35%;left:0;right:0}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting{margin-bottom:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-font{height:60px;width:400px;line-height:20px;font-size:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-color{height:60px;width:80px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-subs{height:90px;width:500px;line-height:16px;font-size:16px;display:block}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-operate{margin-top:20px;width:500px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-close{position:absolute;top:0;right:0;height:30px}#subs-shot-studio #subs-shot-studio-subs{position:fixed;background-color:rgba(66,66,66,.5);top:80%;left:50%;padding:${styleData.subsPaddingVertical} ${styleData.subsPaddingHorizontal};transform:translateX(-50%);word-break:keep-all}#subs-shot-studio #subs-shot-studio-subs #subs-shot-studio-subs-text{font-size:${styleData.subsFontSize};letter-spacing:${styleData.subsLetterSpacing}}`;
+    let styleSheet = `@keyframes init{0%{width:200px;color:black}40%{width:200px;color:black}80%{width:50px;color:transparent}100%{width:50px;color:black}}.transparent-elm{opacity:0}#subs-shot-studio *{box-sizing:border-box;z-index:99999}#subs-shot-studio #subs-shot-studio-toggle{position:fixed;top:0;left:0;height:50px;font-size:25px;line-height:45px;text-align:center;overflow-x:hidden;animation:init 1.2s ease-in-out forwards;transition:opacity .5s;border:thin solid black;background:silver;border-radius:10px}#subs-shot-studio #subs-shot-studio-toggle:hover{opacity:1}#subs-shot-studio #subs-shot-studio-form-mother{background-color:rgba(66,66,66,.5);position:fixed;padding:30px 50px;border:thin solid black;width:600px;margin-left:auto;margin-right:auto;top:35%;left:0;right:0}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting{margin-bottom:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-font{height:60px;width:400px;line-height:20px;font-size:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-color{height:60px;width:80px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-subs{height:90px;width:500px;line-height:16px;font-size:16px;display:block}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-operate{margin-top:20px;width:500px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-close{position:absolute;top:0;right:0;height:30px}#subs-shot-studio #subs-shot-studio-subs{position:fixed;background-color:${styleData.subsBackgroundColor};top:80%;left:50%;padding:${styleData.subsPaddingVertical} ${styleData.subsPaddingHorizontal};transform:translateX(-50%);word-break:keep-all}#subs-shot-studio #subs-shot-studio-subs #subs-shot-studio-subs-text{font-size:${styleData.subsFontSize};letter-spacing:${styleData.subsLetterSpacing}}`;
 
     class subsShotStudio {
         constructor() {
@@ -59,6 +59,7 @@
             closeButton.value = "x";
             fontInput.placeholder = "font name";
             subsInput.placeholder = "caption";
+            formToggleElm.textContent = "SubsShotStudio";
             formToggleElm.addEventListener("click", () => {
                 this.toggleForm();
             });
@@ -79,6 +80,7 @@
             subsShotStudioElm.appendChild(formMother);
             subsShotStudioElm.appendChild(formToggleElm);
             this.subsShotStudio = document.querySelector("body").appendChild(subsShotStudioElm);
+            this.toggler = this.subsShotStudio.querySelector("#subs-shot-studio-toggle");
             this.formMother = this.subsShotStudio.querySelector("#subs-shot-studio-form-mother");
             this.form = this.formMother.querySelector("#subs-shot-studio-form");
             this.fontInputElm = this.form.querySelector("#subs-shot-studio-form-font");
@@ -86,6 +88,12 @@
             this.colorInputElm = this.form.querySelector("#subs-shot-studio-form-color");
             this.subsInputElm = this.form.querySelector("#subs-shot-studio-form-subs");
             this.formMother.style.display = "none";
+            setTimeout(() => {
+                this.toggler.textContent = "S";
+                setTimeout(() => {
+                    this.toggler.classList.add("transparent-elm");
+                }, 240);
+            }, 960);
         }
 
         toggleForm() {

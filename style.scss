@@ -1,3 +1,26 @@
+@keyframes init {
+  0% {
+    width: 200px;
+    color: black;
+  }
+  40% {
+    width: 200px;
+    color: black;
+  }
+  80% {
+    width: 50px;
+    color: transparent;
+  }
+  100% {
+    width: 50px;
+    color: black;
+  }
+}
+
+.transparent-elm {
+  opacity: 0;
+}
+
 #subs-shot-studio {
   & * {
     box-sizing: border-box;
@@ -8,10 +31,18 @@
     top: 0;
     left: 0;
     height: 50px;
-    width: 50px;
+    font-size: 25px;
+    line-height: 45px;
+    text-align: center;
+    overflow-x: hidden;
+    animation: init 1.2s ease-in-out forwards;
+    transition: opacity .5s;
     border: thin solid black;
     background: silver;
     border-radius: 10px;
+    &:hover {
+      opacity: 1;
+    }
   }
   #subs-shot-studio-form-mother {
     //display: none;

@@ -6,10 +6,11 @@ let styleData = {
     subsPaddingHorizontal: "20px",
 };
 
-let styleSheet: string = `#subs-shot-studio *{box-sizing:border-box;z-index:99999}#subs-shot-studio #subs-shot-studio-toggle{position:fixed;top:0;left:0;height:50px;width:50px;border:thin solid black;background:silver;border-radius:10px}#subs-shot-studio #subs-shot-studio-form-mother{background-color:rgba(66,66,66,.5);position:fixed;padding:30px 50px;border:thin solid black;width:600px;margin-left:auto;margin-right:auto;top:35%;left:0;right:0}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting{margin-bottom:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-font{height:60px;width:400px;line-height:20px;font-size:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-color{height:60px;width:80px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-subs{height:90px;width:500px;line-height:16px;font-size:16px;display:block}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-operate{margin-top:20px;width:500px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-close{position:absolute;top:0;right:0;height:30px}#subs-shot-studio #subs-shot-studio-subs{position:fixed;background-color:rgba(66,66,66,.5);top:80%;left:50%;padding:${styleData.subsPaddingVertical} ${styleData.subsPaddingHorizontal};transform:translateX(-50%);word-break:keep-all}#subs-shot-studio #subs-shot-studio-subs #subs-shot-studio-subs-text{font-size:${styleData.subsFontSize};letter-spacing:${styleData.subsLetterSpacing}}`;
+//let styleSheet: string = `#subs-shot-studio *{box-sizing:border-box;z-index:99999}#subs-shot-studio #subs-shot-studio-toggle{position:fixed;top:0;left:0;height:50px;width:50px;border:thin solid black;background:silver;border-radius:10px}#subs-shot-studio #subs-shot-studio-form-mother{background-color:rgba(66,66,66,.5);position:fixed;padding:30px 50px;border:thin solid black;width:600px;margin-left:auto;margin-right:auto;top:35%;left:0;right:0}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting{margin-bottom:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-font{height:60px;width:400px;line-height:20px;font-size:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-color{height:60px;width:80px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-subs{height:90px;width:500px;line-height:16px;font-size:16px;display:block}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-operate{margin-top:20px;width:500px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-close{position:absolute;top:0;right:0;height:30px}#subs-shot-studio #subs-shot-studio-subs{position:fixed;background-color:rgba(66,66,66,.5);top:80%;left:50%;padding:${styleData.subsPaddingVertical} ${styleData.subsPaddingHorizontal};transform:translateX(-50%);word-break:keep-all}#subs-shot-studio #subs-shot-studio-subs #subs-shot-studio-subs-text{font-size:${styleData.subsFontSize};letter-spacing:${styleData.subsLetterSpacing}}`;
 
 class subsShotStudio {
     subsShotStudio: HTMLDivElement;
+    toggler: HTMLDivElement;
     formMother: HTMLDivElement;
     form: HTMLFormElement;
     fontInputElm: HTMLInputElement;
@@ -19,9 +20,11 @@ class subsShotStudio {
     settingElm: HTMLDivElement;
 
     constructor() {
+        /*
         let styleElm: HTMLStyleElement = document.createElement("style");
         styleElm.textContent = styleSheet;
         document.querySelector("head").appendChild(styleElm);
+        */
 
         let subsShotStudioElm: HTMLDivElement = document.createElement("div");
         let formToggleElm: HTMLDivElement = document.createElement("div");
@@ -61,6 +64,8 @@ class subsShotStudio {
         fontInput.placeholder = "font name";
         subsInput.placeholder = "caption";
 
+        formToggleElm.textContent = "SubsShotStudio";
+
         formToggleElm.addEventListener("click", () => {
             this.toggleForm()
         });
@@ -85,6 +90,7 @@ class subsShotStudio {
         subsShotStudioElm.appendChild(formToggleElm);
 
         this.subsShotStudio = document.querySelector("body").appendChild(subsShotStudioElm);
+        this.toggler = this.subsShotStudio.querySelector("#subs-shot-studio-toggle");
         this.formMother = this.subsShotStudio.querySelector("#subs-shot-studio-form-mother");
         this.form = this.formMother.querySelector("#subs-shot-studio-form");
         this.fontInputElm = this.form.querySelector("#subs-shot-studio-form-font");
@@ -93,6 +99,13 @@ class subsShotStudio {
         this.subsInputElm = this.form.querySelector("#subs-shot-studio-form-subs");
 
         this.formMother.style.display = "none";
+
+        setTimeout(() => {
+            this.toggler.textContent = "S";
+            setTimeout(() => {
+                this.toggler.classList.add("transparent-elm")
+            }, 240)
+        }, 960)
     }
 
     toggleForm() {

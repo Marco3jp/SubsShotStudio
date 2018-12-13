@@ -17,7 +17,6 @@ class subsShotStudio {
     bgInputElm: HTMLInputElement;
     colorInputElm: HTMLTextAreaElement;
     subsInputElm: HTMLInputElement;
-    settingElm: HTMLDivElement;
 
     constructor() {
         let styleElm: HTMLStyleElement = document.createElement("style");

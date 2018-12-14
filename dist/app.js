@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SubsShotStudio
 // @namespace    https://marco.plus
-// @version      0.2.1
+// @version      0.2.2
 // @description  Do you want to make SubsShot for Lightning Talks?
 // @author       Marco
 // @match        *://www.youtube.com/*
@@ -87,6 +87,7 @@
             //this.bgInputElm = this.form.querySelector("#subs-shot-studio-form-bg");
             this.colorInputElm = this.form.querySelector("#subs-shot-studio-form-color");
             this.subsInputElm = this.form.querySelector("#subs-shot-studio-form-subs");
+            this.subsShotStudio.style.setProperty("display", "unset", "important");
             this.formMother.style.display = "none";
             setTimeout(() => {
                 this.toggler.textContent = "S";

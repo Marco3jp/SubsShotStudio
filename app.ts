@@ -95,6 +95,7 @@ class subsShotStudio {
         this.colorInputElm = this.form.querySelector("#subs-shot-studio-form-color");
         this.subsInputElm = this.form.querySelector("#subs-shot-studio-form-subs");
 
+        this.subsShotStudio.style.setProperty("display", "unset", "important");
         this.formMother.style.display = "none";
 
         setTimeout(() => {

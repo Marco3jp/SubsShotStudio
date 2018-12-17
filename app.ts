@@ -194,4 +194,7 @@ class subsShotStudio {
         console.log(this.moveTogglerValues);
     }
 
+    moveToggler(event: MouseEvent) {
+        this.togglerElm.style.transform = `translate(${event.clientX - this.moveTogglerValues.downEventX}px,${event.clientY - this.moveTogglerValues.downEventY}px)`;
+    }
 let SubsShotStudio: subsShotStudio = new subsShotStudio();

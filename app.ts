@@ -1,3 +1,12 @@
+interface moveValues {
+    clicking: boolean;
+    moving: boolean;
+    targetX: number;
+    targetY: number;
+    downEventX: number;
+    downEventY: number;
+}
+
 let styleData = {
     subsFontSize: "65px",
     subsLetterSpacing: "1px",

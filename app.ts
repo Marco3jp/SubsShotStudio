@@ -89,23 +89,18 @@ class subsShotStudio {
 
         settingElm.appendChild(fontInput);
         settingElm.appendChild(colorInput);
+        this.fontInputElm = settingElm.appendChild(fontInput);
+        this.colorInputElm = settingElm.appendChild(colorInput);
         form.appendChild(settingElm);
-        form.appendChild(subsInput);
+        this.subsInputElm = form.appendChild(subsInput);
         form.appendChild(operateButton);
-        form.appendChild(closeButton);
+        this.closeButtonElm = form.appendChild(closeButton);
         //settingElm.appendChild(bgInput);
-        formMother.appendChild(form);
-        subsShotStudioElm.appendChild(formMother);
-        subsShotStudioElm.appendChild(formToggleElm);
+        this.formElm = formMother.appendChild(form);
+        this.formMotherElm = subsShotStudioElm.appendChild(formMother);
+        this.togglerElm = subsShotStudioElm.appendChild(formToggleElm);
 
         this.subsShotStudio = document.querySelector("body").appendChild(subsShotStudioElm);
-        this.toggler = this.subsShotStudio.querySelector("#subs-shot-studio-toggle");
-        this.formMother = this.subsShotStudio.querySelector("#subs-shot-studio-form-mother");
-        this.form = this.formMother.querySelector("#subs-shot-studio-form");
-        this.fontInputElm = this.form.querySelector("#subs-shot-studio-form-font");
-        //this.bgInputElm = this.form.querySelector("#subs-shot-studio-form-bg");
-        this.colorInputElm = this.form.querySelector("#subs-shot-studio-form-color");
-        this.subsInputElm = this.form.querySelector("#subs-shot-studio-form-subs");
 
         this.subsShotStudio.style.setProperty("display", "unset", "important");
         this.formMother.style.display = "none";

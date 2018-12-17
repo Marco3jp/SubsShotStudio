@@ -182,7 +182,6 @@ class subsShotStudio {
         subs.parentNode.removeChild(subs);
         this.openForm();
     }
-}
 
     saveTogglerCoordinate(event: MouseEvent) {
         // @ts-ignore
@@ -221,5 +220,10 @@ class subsShotStudio {
         this.togglerElm.style.left = "0";
         this.togglerElm.style.top = "0";
     }
+
+    resetTogglerTransform() {
+        this.togglerElm.style.transform = null;
+    }
+}
 
 let SubsShotStudio: subsShotStudio = new subsShotStudio();

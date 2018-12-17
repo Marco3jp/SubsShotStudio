@@ -60,7 +60,6 @@
             fontInput.placeholder = "font name";
             subsInput.placeholder = "caption";
             formToggleElm.textContent = "SubsShotStudio";
-            formToggleElm.draggable = true;
             this.fontInputElm = settingElm.appendChild(fontInput);
             this.colorInputElm = settingElm.appendChild(colorInput);
             form.appendChild(settingElm);
@@ -96,7 +95,7 @@
                 if (this.moveTogglerValues.clicking) {
                     this.confirmTogglerCoordinate(event);
                 }
-                if (!this.moveTogglerValues.moving) {
+                if (this.moveTogglerValues.clicking && !this.moveTogglerValues.moving) {
                     this.toggleForm();
                 }
                 this.moveTogglerValues.clicking = false;

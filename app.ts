@@ -184,5 +184,14 @@ class subsShotStudio {
     }
 }
 
+    saveTogglerCoordinate(event: MouseEvent) {
+        // @ts-ignore
+        this.moveTogglerValues.targetX = event.target.getBoundingClientRect().left;
+        // @ts-ignore
+        this.moveTogglerValues.targetY = event.target.getBoundingClientRect().top;
+        this.moveTogglerValues.downEventX = event.clientX;
+        this.moveTogglerValues.downEventY = event.clientY;
+        console.log(this.moveTogglerValues);
+    }
 
 let SubsShotStudio: subsShotStudio = new subsShotStudio();

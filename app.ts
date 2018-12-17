@@ -197,4 +197,24 @@ class subsShotStudio {
     moveToggler(event: MouseEvent) {
         this.togglerElm.style.transform = `translate(${event.clientX - this.moveTogglerValues.downEventX}px,${event.clientY - this.moveTogglerValues.downEventY}px)`;
     }
+
+    confirmTogglerCoordinate(event: MouseEvent) {
+        let left = this.moveTogglerValues.targetX + (event.clientX - this.moveTogglerValues.downEventX);
+        let top = this.moveTogglerValues.targetY + (event.clientY - this.moveTogglerValues.downEventY);
+
+        this.togglerElm.style.transform = null;
+
+        if (left < 0) {
+            this.togglerElm.style.left = "0";
+        } else {
+            this.togglerElm.style.left = `${left}px`;
+        }
+        if (top < 0) {
+            this.togglerElm.style.top = "0";
+        } else {
+            this.togglerElm.style.top = `${top}px`;
+        }
+        this.resetTogglerTransform();
+    }
+
 let SubsShotStudio: subsShotStudio = new subsShotStudio();

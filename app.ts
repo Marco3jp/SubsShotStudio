@@ -114,7 +114,7 @@ class subsShotStudio {
             if (this.moveTogglerValues.clicking) {
                 this.confirmTogglerCoordinate(event);
             }
-            if (!this.moveTogglerValues.moving) {
+            if (this.moveTogglerValues.clicking && !this.moveTogglerValues.moving) {
                 this.toggleForm();
             }
             this.moveTogglerValues.clicking = false;

@@ -19,13 +19,16 @@ let styleSheet: string = `@keyframes init{0%{width:200px;color:black}40%{width:2
 
 class subsShotStudio {
     subsShotStudio: HTMLDivElement;
-    toggler: HTMLDivElement;
-    formMother: HTMLDivElement;
-    form: HTMLFormElement;
+    togglerElm: HTMLDivElement;
+    formMotherElm: HTMLDivElement;
+    closeButtonElm: HTMLInputElement;
+    formElm: HTMLFormElement;
     fontInputElm: HTMLInputElement;
     bgInputElm: HTMLInputElement;
-    colorInputElm: HTMLTextAreaElement;
-    subsInputElm: HTMLInputElement;
+    colorInputElm: HTMLInputElement;
+    subsInputElm: HTMLTextAreaElement;
+
+    moveTogglerValues: moveValues;
 
     constructor() {
         let styleElm: HTMLStyleElement = document.createElement("style");

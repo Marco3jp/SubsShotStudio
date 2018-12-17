@@ -75,9 +75,8 @@ class subsShotStudio {
 
         formToggleElm.textContent = "SubsShotStudio";
 
+        formToggleElm.draggable = true;
 
-        settingElm.appendChild(fontInput);
-        settingElm.appendChild(colorInput);
         this.fontInputElm = settingElm.appendChild(fontInput);
         this.colorInputElm = settingElm.appendChild(colorInput);
         form.appendChild(settingElm);
@@ -92,7 +91,16 @@ class subsShotStudio {
         this.subsShotStudio = document.querySelector("body").appendChild(subsShotStudioElm);
 
         this.subsShotStudio.style.setProperty("display", "unset", "important");
-        this.formMother.style.display = "none";
+        this.formMotherElm.style.display = "none";
+
+        this.moveTogglerValues = {
+            clicking: false,
+            moving: false,
+            targetX: 0,
+            targetY: 0,
+            downEventX: 0,
+            downEventY: 0,
+        };
 
         this.togglerElm.addEventListener("mousedown", (event: MouseEvent) => {
             this.moveTogglerValues.clicking = true;
@@ -128,27 +136,29 @@ class subsShotStudio {
         });
 
         setTimeout(() => {
-            this.toggler.textContent = "S";
+            this.togglerElm.textContent = "S";
             setTimeout(() => {
-                this.toggler.classList.add("transparent-elm")
+                this.togglerElm.classList.add("transparent-elm")
             }, 240)
         }, 960)
     }
 
     toggleForm() {
-        if (this.formMother.style.display === "none") {
-            this.openForm();
-        } else {
-            this.closeForm();
+        if (!this.moveTogglerValues.moving) {
+            if (this.formMotherElm.style.display === "none") {
+                this.openForm();
+            } else {
+                this.closeForm();
+            }
         }
     }
 
     closeForm() {
-        this.formMother.style.display = "none";
+        this.formMotherElm.style.display = "none";
     }
 
     openForm() {
-        this.formMother.style.display = null;
+        this.formMotherElm.style.display = null;
     }
 
     createSubs() {

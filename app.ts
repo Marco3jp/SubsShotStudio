@@ -217,4 +217,9 @@ class subsShotStudio {
         this.resetTogglerTransform();
     }
 
+    resetTogglerCoordinate() {
+        this.togglerElm.style.left = "0";
+        this.togglerElm.style.top = "0";
+    }
+
 let SubsShotStudio: subsShotStudio = new subsShotStudio();

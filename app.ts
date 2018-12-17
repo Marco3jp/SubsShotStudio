@@ -75,17 +75,6 @@ class subsShotStudio {
 
         formToggleElm.textContent = "SubsShotStudio";
 
-        formToggleElm.addEventListener("click", () => {
-            this.toggleForm()
-        });
-
-        closeButton.addEventListener("click", () => {
-            this.closeForm();
-        });
-
-        operateButton.addEventListener("click", () => {
-            this.createSubs();
-        });
 
         settingElm.appendChild(fontInput);
         settingElm.appendChild(colorInput);
@@ -104,6 +93,39 @@ class subsShotStudio {
 
         this.subsShotStudio.style.setProperty("display", "unset", "important");
         this.formMother.style.display = "none";
+
+        this.togglerElm.addEventListener("mousedown", (event: MouseEvent) => {
+            this.moveTogglerValues.clicking = true;
+            this.saveTogglerCoordinate(event);
+        });
+        document.querySelector("body").addEventListener("mousemove", (event: MouseEvent) => {
+            if (this.moveTogglerValues.clicking) {
+                this.moveTogglerValues.moving = true;
+                this.moveToggler(event);
+            }
+        });
+        document.querySelector("body").addEventListener("mouseup", (event: MouseEvent) => {
+            if (this.moveTogglerValues.clicking) {
+                this.confirmTogglerCoordinate(event);
+            }
+            if (!this.moveTogglerValues.moving) {
+                this.toggleForm();
+            }
+            this.moveTogglerValues.clicking = false;
+            this.moveTogglerValues.moving = false;
+        });
+        /*
+        formToggleElm.addEventListener("dragexit", () => {
+            this.resetTogglerCoordinate();
+        });
+        */
+        closeButton.addEventListener("click", () => {
+            this.closeForm();
+        });
+
+        operateButton.addEventListener("click", () => {
+            this.createSubs();
+        });
 
         setTimeout(() => {
             this.toggler.textContent = "S";

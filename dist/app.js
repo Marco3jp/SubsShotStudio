@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SubsShotStudio
 // @namespace    https://marco.plus
-// @version      0.3
+// @version      0.3.1
 // @description  Do you want to make SubsShot for Lightning Talks?
 // @author       Marco
 // @match        *://www.youtube.com/*

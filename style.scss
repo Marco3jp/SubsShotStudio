@@ -40,6 +40,11 @@
     border: thin solid black;
     background: silver;
     border-radius: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
     &:hover {
       opacity: 1;
     }

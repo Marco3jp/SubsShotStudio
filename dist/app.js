@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SubsShotStudio
 // @namespace    https://marco.plus
-// @version      0.2.2
+// @version      0.3
 // @description  Do you want to make SubsShot for Lightning Talks?
 // @author       Marco
 // @match        *://www.youtube.com/*
@@ -19,7 +19,7 @@
         subsPaddingVertical: "10px",
         subsPaddingHorizontal: "20px",
     };
-    let styleSheet = `@keyframes init{0%{width:200px;color:black}40%{width:200px;color:black}80%{width:50px;color:transparent}100%{width:50px;color:black}}.transparent-elm{opacity:0}#subs-shot-studio *{box-sizing:border-box;z-index:99999}#subs-shot-studio #subs-shot-studio-toggle{position:fixed;top:0;left:0;height:50px;font-size:25px;line-height:45px;text-align:center;overflow-x:hidden;animation:init 1.2s ease-in-out forwards;transition:opacity .5s;border:thin solid black;background:silver;border-radius:10px}#subs-shot-studio #subs-shot-studio-toggle:hover{opacity:1}#subs-shot-studio #subs-shot-studio-form-mother{background-color:rgba(66,66,66,.5);position:fixed;padding:30px 50px;border:thin solid black;width:600px;margin-left:auto;margin-right:auto;top:35%;left:0;right:0}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting{margin-bottom:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-font{height:60px;width:400px;line-height:20px;font-size:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-color{height:60px;width:80px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-subs{height:90px;width:500px;line-height:16px;font-size:16px;display:block}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-operate{margin-top:20px;width:500px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-close{position:absolute;top:0;right:0;height:30px}#subs-shot-studio #subs-shot-studio-subs{position:fixed;background-color:${styleData.subsBackgroundColor};top:80%;left:50%;padding:${styleData.subsPaddingVertical} ${styleData.subsPaddingHorizontal};transform:translateX(-50%);word-break:keep-all;white-space:nowrap}#subs-shot-studio #subs-shot-studio-subs #subs-shot-studio-subs-text{font-size:${styleData.subsFontSize};letter-spacing:${styleData.subsLetterSpacing}}`;
+    let styleSheet = `@keyframes init{0%{width:200px;color:black}40%{width:200px;color:black}80%{width:50px;color:transparent}100%{width:50px;color:black}}.transparent-elm{opacity:0}#subs-shot-studio *{box-sizing:border-box;z-index:99999}#subs-shot-studio #subs-shot-studio-toggle{position:fixed;top:0;left:0;height:50px;font-size:25px;line-height:45px;text-align:center;overflow-x:hidden;animation:init 1.2s ease-in-out forwards;transition:opacity .5s;border:thin solid black;background:silver;border-radius:10px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer}#subs-shot-studio #subs-shot-studio-toggle:hover{opacity:1}#subs-shot-studio #subs-shot-studio-form-mother{background-color:rgba(66,66,66,.5);position:fixed;padding:30px 50px;border:thin solid black;width:600px;margin-left:auto;margin-right:auto;top:35%;left:0;right:0}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting{margin-bottom:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-font{height:60px;width:400px;line-height:20px;font-size:20px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-setting #subs-shot-studio-form-color{height:60px;width:80px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-subs{height:90px;width:500px;line-height:16px;font-size:16px;display:block}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-operate{margin-top:20px;width:500px}#subs-shot-studio #subs-shot-studio-form-mother #subs-shot-studio-form #subs-shot-studio-form-close{position:absolute;top:0;right:0;height:30px}#subs-shot-studio #subs-shot-studio-subs{position:fixed;background-color:${styleData.subsBackgroundColor};top:80%;left:50%;padding:${styleData.subsPaddingVertical} ${styleData.subsPaddingHorizontal};transform:translateX(-50%);word-break:keep-all;white-space:nowrap}#subs-shot-studio #subs-shot-studio-subs #subs-shot-studio-subs-text{font-size:${styleData.subsFontSize};letter-spacing:${styleData.subsLetterSpacing}}`;
 
     class subsShotStudio {
         constructor() {
@@ -60,58 +60,84 @@
             fontInput.placeholder = "font name";
             subsInput.placeholder = "caption";
             formToggleElm.textContent = "SubsShotStudio";
-            formToggleElm.addEventListener("click", () => {
-                this.toggleForm();
+            formToggleElm.draggable = true;
+            this.fontInputElm = settingElm.appendChild(fontInput);
+            this.colorInputElm = settingElm.appendChild(colorInput);
+            form.appendChild(settingElm);
+            this.subsInputElm = form.appendChild(subsInput);
+            form.appendChild(operateButton);
+            this.closeButtonElm = form.appendChild(closeButton);
+            //settingElm.appendChild(bgInput);
+            this.formElm = formMother.appendChild(form);
+            this.formMotherElm = subsShotStudioElm.appendChild(formMother);
+            this.togglerElm = subsShotStudioElm.appendChild(formToggleElm);
+            this.subsShotStudio = document.querySelector("body").appendChild(subsShotStudioElm);
+            this.subsShotStudio.style.setProperty("display", "unset", "important");
+            this.formMotherElm.style.display = "none";
+            this.moveTogglerValues = {
+                clicking: false,
+                moving: false,
+                targetX: 0,
+                targetY: 0,
+                downEventX: 0,
+                downEventY: 0,
+            };
+            this.togglerElm.addEventListener("mousedown", (event) => {
+                this.moveTogglerValues.clicking = true;
+                this.saveTogglerCoordinate(event);
             });
+            document.querySelector("body").addEventListener("mousemove", (event) => {
+                if (this.moveTogglerValues.clicking) {
+                    this.moveTogglerValues.moving = true;
+                    this.moveToggler(event);
+                }
+            });
+            document.querySelector("body").addEventListener("mouseup", (event) => {
+                if (this.moveTogglerValues.clicking) {
+                    this.confirmTogglerCoordinate(event);
+                }
+                if (!this.moveTogglerValues.moving) {
+                    this.toggleForm();
+                }
+                this.moveTogglerValues.clicking = false;
+                this.moveTogglerValues.moving = false;
+            });
+            /*
+            formToggleElm.addEventListener("dragexit", () => {
+                this.resetTogglerCoordinate();
+            });
+            */
             closeButton.addEventListener("click", () => {
                 this.closeForm();
             });
             operateButton.addEventListener("click", () => {
                 this.createSubs();
             });
-            settingElm.appendChild(fontInput);
-            settingElm.appendChild(colorInput);
-            form.appendChild(settingElm);
-            form.appendChild(subsInput);
-            form.appendChild(operateButton);
-            form.appendChild(closeButton);
-            //settingElm.appendChild(bgInput);
-            formMother.appendChild(form);
-            subsShotStudioElm.appendChild(formMother);
-            subsShotStudioElm.appendChild(formToggleElm);
-            this.subsShotStudio = document.querySelector("body").appendChild(subsShotStudioElm);
-            this.toggler = this.subsShotStudio.querySelector("#subs-shot-studio-toggle");
-            this.formMother = this.subsShotStudio.querySelector("#subs-shot-studio-form-mother");
-            this.form = this.formMother.querySelector("#subs-shot-studio-form");
-            this.fontInputElm = this.form.querySelector("#subs-shot-studio-form-font");
-            //this.bgInputElm = this.form.querySelector("#subs-shot-studio-form-bg");
-            this.colorInputElm = this.form.querySelector("#subs-shot-studio-form-color");
-            this.subsInputElm = this.form.querySelector("#subs-shot-studio-form-subs");
-            this.subsShotStudio.style.setProperty("display", "unset", "important");
-            this.formMother.style.display = "none";
             setTimeout(() => {
-                this.toggler.textContent = "S";
+                this.togglerElm.textContent = "S";
                 setTimeout(() => {
-                    this.toggler.classList.add("transparent-elm");
+                    this.togglerElm.classList.add("transparent-elm");
                 }, 240);
             }, 960);
         }
 
         toggleForm() {
-            if (this.formMother.style.display === "none") {
-                this.openForm();
-            }
-            else {
-                this.closeForm();
+            if (!this.moveTogglerValues.moving) {
+                if (this.formMotherElm.style.display === "none") {
+                    this.openForm();
+                }
+                else {
+                    this.closeForm();
+                }
             }
         }
 
         closeForm() {
-            this.formMother.style.display = "none";
+            this.formMotherElm.style.display = "none";
         }
 
         openForm() {
-            this.formMother.style.display = null;
+            this.formMotherElm.style.display = null;
         }
 
         createSubs() {
@@ -134,6 +160,48 @@
             let subs = this.subsShotStudio.querySelector("#subs-shot-studio-subs");
             subs.parentNode.removeChild(subs);
             this.openForm();
+        }
+
+        saveTogglerCoordinate(event) {
+            // @ts-ignore
+            this.moveTogglerValues.targetX = event.target.getBoundingClientRect().left;
+            // @ts-ignore
+            this.moveTogglerValues.targetY = event.target.getBoundingClientRect().top;
+            this.moveTogglerValues.downEventX = event.clientX;
+            this.moveTogglerValues.downEventY = event.clientY;
+            console.log(this.moveTogglerValues);
+        }
+
+        moveToggler(event) {
+            this.togglerElm.style.transform = `translate(${event.clientX - this.moveTogglerValues.downEventX}px,${event.clientY - this.moveTogglerValues.downEventY}px)`;
+        }
+
+        confirmTogglerCoordinate(event) {
+            let left = this.moveTogglerValues.targetX + (event.clientX - this.moveTogglerValues.downEventX);
+            let top = this.moveTogglerValues.targetY + (event.clientY - this.moveTogglerValues.downEventY);
+            this.togglerElm.style.transform = null;
+            if (left < 0) {
+                this.togglerElm.style.left = "0";
+            }
+            else {
+                this.togglerElm.style.left = `${left}px`;
+            }
+            if (top < 0) {
+                this.togglerElm.style.top = "0";
+            }
+            else {
+                this.togglerElm.style.top = `${top}px`;
+            }
+            this.resetTogglerTransform();
+        }
+
+        resetTogglerCoordinate() {
+            this.togglerElm.style.left = "0";
+            this.togglerElm.style.top = "0";
+        }
+
+        resetTogglerTransform() {
+            this.togglerElm.style.transform = null;
         }
     }
 

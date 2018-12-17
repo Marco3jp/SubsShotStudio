@@ -74,9 +74,7 @@ class subsShotStudio {
         subsInput.placeholder = "caption";
 
         formToggleElm.textContent = "SubsShotStudio";
-
-        formToggleElm.draggable = true;
-
+        
         this.fontInputElm = settingElm.appendChild(fontInput);
         this.colorInputElm = settingElm.appendChild(colorInput);
         form.appendChild(settingElm);

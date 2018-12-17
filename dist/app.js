@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SubsShotStudio
 // @namespace    https://marco.plus
-// @version      0.4
+// @version      0.4.1
 // @description  Do you want to make SubsShot for Lightning Talks?
 // @author       Marco
 // @match        *://www.youtube.com/*
@@ -157,7 +157,7 @@
             let subs = document.createElement("span");
             subsElm.id = "subs-shot-studio-subs";
             subs.id = "subs-shot-studio-subs-text";
-            subs.textContent = this.subsInputElm.value;
+            subs.innerText = this.subsInputElm.value;
             subsElm.style.fontFamily = this.fontInputElm.value !== "default" ? this.fontInputElm.value : null;
             subsElm.style.color = this.colorInputElm.value;
             //subsElm.style.background = this.bgInputElm.value;

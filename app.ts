@@ -176,7 +176,7 @@ class subsShotStudio {
         let subs = document.createElement("span");
         subsElm.id = "subs-shot-studio-subs";
         subs.id = "subs-shot-studio-subs-text";
-        subs.textContent = this.subsInputElm.value;
+        subs.innerText = this.subsInputElm.value;
         subsElm.style.fontFamily = this.fontInputElm.value !== "default" ? this.fontInputElm.value : null;
         subsElm.style.color = this.colorInputElm.value;
         //subsElm.style.background = this.bgInputElm.value;
